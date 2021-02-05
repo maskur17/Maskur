@@ -269,14 +269,14 @@ void papan3ply(){
 void turn(){
 	int x=0, y=0;
 	do{
-	inputPlayer1(x, y);
-	dispPapan();
-	system("cls");
-	dispPapan();
-	inputPlayer2(x, y);
-	dispPapan();
-	system("cls");
-	dispPapan();
+		inputPlayer1(x, y);
+		dispPapan();
+		system("cls");
+		dispPapan();
+		inputPlayer2(x, y);
+		dispPapan();
+		system("cls");
+		dispPapan();
 	}
 while(1);
 }
