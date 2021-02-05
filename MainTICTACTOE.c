@@ -16,7 +16,11 @@
 	void setLevel();
 	void setMode();
 	void setScore();
-	void turn();
+
+	void turn1();
+	void turn2();
+	void turn3();
+
 	void inputPlayer1(int i, int j);
 	void inputPlayer2(int i, int j);
 	void dispPapan();
@@ -28,16 +32,30 @@
 	void papan1com();
 	void papan2com();
 	void papan3com();
+
 	void papan1ply();
 	void papan2ply();
 	void papan3ply();
+
 	void persiapanPapan();
 	bool cekPenuh();
-	bool cekJadi();
+	bool cekBarisJadi1();
+    bool cekKolomJadi1();
+    bool cekDiagonalJadi1();
 
+	bool cekBarisJadi2();
+    bool cekKolomJadi2();
+    bool cekDiagonalJadi2();
+
+	bool cekBarisJadi3();
+    bool cekKolomJadi3();
+    bool cekDiagonalJadi3();
+
+void gameover();
 
 //Variabel Global
 	int p, q, r, s, t, size;
+	int score1, score2;
 	char prepan [6][6];
 
 
@@ -128,12 +146,9 @@ void setScore() {
     printf("\n==================================================");
     printf("\n [1] 3     	   [2] 4	        	[3] 5");
     printf("\n Pilihan anda : "); scanf("%d", &t);
-//printf("\n%d\n", t);
-    system("pause");
     system("cls");
 	if(t > 3){
 		printf("WRONG INPUT NUMBER.\n");
-        system("pause");
         setScore();
     }else{
         system("cls");
@@ -194,6 +209,7 @@ void persiapanPapan(){
 	int i, j;
 	char prepBar = '0';
 	char prepKol = '1';
+	printf("player 1 : %d          player2: %d \n", score1, score2);
 	for (i = 0; i< size;i++){
 		for(j=0; j< size; j++){
 			if(i==0){
@@ -225,8 +241,7 @@ void papan2(){
 void papan1ply(){
 	size=4;
 	persiapanPapan();
-	system("pause");
-	turn();
+	turn1();
 
 }
 
@@ -239,7 +254,7 @@ void papan2com(){
 void papan2ply(){
 	size=5;
 	persiapanPapan();
-	system("pause");
+	turn2();
 }
 
 void papan3(){
@@ -262,28 +277,45 @@ void papan3com(){
 void papan3ply(){
 	size=6;
 	persiapanPapan();
-	system("pause");
+    turn3();
 }
 
 
-void turn(){
+void turn1(){
 	int x=0, y=0;
-	do{
-		inputPlayer1(x, y);
-		dispPapan();
-		system("cls");
-		dispPapan();
-		inputPlayer2(x, y);
-		dispPapan();
-		system("cls");
-		dispPapan();
-	}
-while(1);
+	score1=0; score2=0;
+	bool karakter = true;
+	while (score1 != t+2 && score2 != t+2){
+	while(cekKolomJadi1() && cekBarisJadi1() && cekDiagonalJadi1 && cekPenuh()){
+        inputPlayer1(x, y);
+        dispPapan();
+        karakter = (cekKolomJadi1() && cekBarisJadi1() && cekDiagonalJadi1 && cekPenuh());
+    if (!karakter){
+        score1 ++;
+        system("cls");
+        break ;
+    }
+        system("cls");
+        dispPapan();
+        inputPlayer2(x, y);
+        dispPapan();
+        karakter = (cekKolomJadi1() && cekBarisJadi1() && cekDiagonalJadi1 && cekPenuh());
+    if (!karakter){
+        score2 ++;
+        system("cls");
+        break ;
+    }
+        system("cls");
+        dispPapan();
+    }
+    persiapanPapan();
+}
 }
 
 void inputPlayer1(int i, int j){
 	int x, y;
-	printf("Pilihan Anda : ");
+	printf("\n Pilihan Anda ");
+	printf("\n Player1 : ");
 	scanf("%d %d", &x, &y);
 	i = x; j = y;
 	prepan[i][j]='X';
@@ -291,7 +323,8 @@ void inputPlayer1(int i, int j){
 
 void inputPlayer2(int i, int j){
 	int x, y;
-        printf("Pilihan Anda : ");
+        printf("\n Pilihan Anda ");
+        printf("\n Player2 : ");
         scanf("%d %d", &x, &y);
         i = x; j = y;
         prepan[i][j]='O';
@@ -299,6 +332,7 @@ void inputPlayer2(int i, int j){
 
 void dispPapan(){
 int i, j;
+printf("player 1 : %d          player2: %d \n", score1, score2);
     for (i = 0; i< size;i++){
 		for(j=0; j< size; j++){
             printf("%c | ", prepan[i][j]);
@@ -308,8 +342,178 @@ int i, j;
 }
 
 bool cekPenuh(){
-	cekJadi();
+    int angka = 0;
+    bool penuh = true;
+    for (int i = 1; i < size; i++){
+    for (int j = 1; j < size; j++){
+        if (prepan[i][j] !='_'){
+            angka ++;
+}
+}
+}   if (angka == 9){
+    return false;
+}   else {
+    return true;
+}
 }
 
-bool cekJadi(){
+bool cekBarisJadi1(){
+    for (int i = 1; i < size; i++){
+    if (prepan[i][1]== 'X'&& prepan[i][2]=='X'&& prepan[i][3]=='X'){
+        return false;
+    }else if (prepan[i][1]== 'O'&& prepan[i][2]=='O'&& prepan[i][3]=='O'){
+        return false;
+    }
+    }
+    return true;
+}
+
+bool cekKolomJadi1(){
+    for (int i = 1; i < size; i++){
+    if (prepan[1][i]== 'X'&& prepan[2][i]=='X'&& prepan[3][i]=='X'){
+        return false;
+    }else if (prepan[1][i]== 'O'&& prepan[2][i]=='O'&& prepan[3][i]=='O'){
+        return false;
+    }
+    }
+    return true;
+}
+
+bool cekDiagonalJadi1(){
+    for (int i = 1; i < size; i++){
+    if (prepan[1][1]== 'X'&& prepan[2][2]=='X'&& prepan[3][3]=='X'){
+        return false;
+    }else if (prepan[1][3]== 'O'&& prepan[2][3]=='O'&& prepan[3][3]=='O'){
+        return false;
+    }
+    }
+    return true;
+}
+
+void turn2(){
+	int x=0, y=0;
+	score1=0; score2=0;
+	bool karakter = true;
+	while (score1 != t+2 && score2 != t+2){
+	while(cekKolomJadi2() && cekBarisJadi2() && cekDiagonalJadi2 && cekPenuh()){
+        inputPlayer1(x, y);
+        dispPapan();
+        karakter = (cekKolomJadi2() && cekBarisJadi2() && cekDiagonalJadi2 && cekPenuh());
+    if (!karakter){
+        score1 ++;
+        system("cls");
+        break ;
+    }
+        system("cls");
+        dispPapan();
+        inputPlayer2(x, y);
+        dispPapan();
+        karakter = (cekKolomJadi2() && cekBarisJadi2() && cekDiagonalJadi2 && cekPenuh());
+    if (!karakter){
+        score2 ++;
+        system("cls");
+        break ;
+    }
+        system("cls");
+        dispPapan();
+    }
+    persiapanPapan();
+}
+}
+
+void turn3(){
+	int x=0, y=0;
+	score1=0; score2=0;
+	bool karakter = true;
+	while (score1 != t+2 && score2 != t+2){
+	while(cekKolomJadi3() && cekBarisJadi3() && cekDiagonalJadi3 && cekPenuh()){
+        inputPlayer1(x, y);
+        dispPapan();
+        karakter = (cekKolomJadi3() && cekBarisJadi3() && cekDiagonalJadi3 && cekPenuh());
+    if (!karakter){
+        score1 ++;
+        system("cls");
+        break ;
+    }
+        system("cls");
+        dispPapan();
+        inputPlayer2(x, y);
+        dispPapan();
+        karakter = (cekKolomJadi3() && cekBarisJadi3() && cekDiagonalJadi3 && cekPenuh());
+    if (!karakter){
+        score2 ++;
+        system("cls");
+        break ;
+    }
+        system("cls");
+        dispPapan();
+    }
+    persiapanPapan();
+}
+}
+
+
+bool cekBarisJadi2(){
+    for (int i = 1; i < size; i++){
+    if (prepan[i][1]== 'X'&& prepan[i][2]=='X'&& prepan[i][3]=='X' && prepan[i][4]=='X'){
+        return false;
+    }else if (prepan[i][1]== 'O'&& prepan[i][2]=='O'&& prepan[i][3]=='O' && prepan[i][4]=='O'){
+        return false;
+    }
+    }
+    return true;
+}
+
+bool cekKolomJadi2(){
+    for (int i = 1; i < size; i++){
+    if (prepan[1][i]== 'X'&& prepan[2][i]=='X'&& prepan[3][i]=='X'&& prepan[4][i]=='X'){
+        return false;
+    }else if (prepan[1][i]== 'O'&& prepan[2][i]=='O'&& prepan[3][i]=='O'&& prepan[4][i]=='O'){
+        return false;
+    }
+    }
+    return true;
+}
+
+bool cekDiagonalJadi2(){
+    for (int i = 1; i < size; i++){
+    if (prepan[1][1]== 'X'&& prepan[2][2]=='X'&& prepan[3][3]=='X'&& prepan[4][4]=='X'){
+        return false;
+    }else if (prepan[1][3]== 'O'&& prepan[2][3]=='O'&& prepan[3][3]=='O'&& prepan[4][4]=='O'){
+        return false;
+    }
+    }
+    return true;
+}
+
+bool cekBarisJadi3(){
+    for (int i = 1; i < size; i++){
+    if (prepan[i][1]== 'X'&& prepan[i][2]=='X'&& prepan[i][3]=='X' && prepan[i][4]=='X'&& prepan[i][5]=='X'){
+        return false;
+    }else if (prepan[i][1]== 'O'&& prepan[i][2]=='O'&& prepan[i][3]=='O' && prepan[i][4]=='O'&& prepan[i][5]=='O'){
+        return false;
+    }
+    }
+    return true;
+}
+
+bool cekKolomJadi3(){
+    for (int i = 1; i < size; i++){
+    if (prepan[1][i]== 'X'&& prepan[2][i]=='X'&& prepan[3][i]=='X'&& prepan[4][i]=='X'&& prepan[5][i]=='X'){
+        return false;
+    }else if (prepan[1][i]== 'O'&& prepan[2][i]=='O'&& prepan[3][i]=='O'&& prepan[4][i]=='O'&& prepan[5][i]=='O'){
+        return false;
+    }
+    }
+    return true;
+}
+bool cekDiagonalJadi3(){
+    for (int i = 1; i < size; i++){
+    if (prepan[1][1]== 'X'&& prepan[2][2]=='X'&& prepan[3][3]=='X'&& prepan[4][4]=='X'&& prepan[5][5]=='X'){
+        return false;
+    }else if (prepan[1][3]== 'O'&& prepan[2][3]=='O'&& prepan[3][3]=='O'&& prepan[4][4]=='O'&& prepan[5][5]=='O'){
+        return false;
+    }
+    }
+    return true;
 }
