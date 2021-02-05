@@ -1,3 +1,7 @@
+/*	PROGRAM		: TICTACTOE.c
+	AUTHOR		: DIMAS KURNIAWAN & MUHAMAD ARYADIPPURA
+*/
+
 #include<stdio.h>
 #include<stdbool.h>
 #include<string.h>
@@ -6,6 +10,7 @@
 #include<windows.h>
 #include<mmsystem.h>
 
+//Modul Utama
 	void gameTictoe();
 	void setPapan();
 	void setLevel();
@@ -28,31 +33,32 @@
 	void papan3ply();
 	void persiapanPapan();
 	bool cekPenuh();
+	bool cekJadi();
 
 
-int p, q, r, s, t, size;
-char prepan [6][6];
+//Variabel Global
+	int p, q, r, s, t, size;
+	char prepan [6][6];
 
 
 int main()
 {
 menu:
-printf("\n================================");
-printf("\n                                ");
-printf("\n          TIC TAC TOE");
-printf("\n                                ");
-printf("\n================================");
-printf("\n [1] Play Game	  [2] Exit Game");
-printf("\n Pilihan anda : "); scanf("%d", &p);
-system("cls");
+    printf("\n================================");
+    printf("\n                                ");
+    printf("\n          TIC TAC TOE");
+    printf("\n                                ");
+    printf("\n================================");
+    printf("\n [1] Play Game	  [2] Exit Game");
+    printf("\n Pilihan anda : "); scanf("%d", &p);
+    system("cls");
 	 switch(p)
-	{
-case 1 :
-setPapan();
-break;
+{
+    case 1 :
+        setPapan();
+    break;
 
-
-case 2 :
+    case 2 :
 	printf("\n BYE :)");
 	break;
 	default:
@@ -62,78 +68,79 @@ case 2 :
 	}
 	return 0;
 }
-void setMode() {
-printf("\n==================================================");
-printf("\n                                ");
-printf("\n  		Mode permainan");
-printf("\n                                ");
-printf("\n==================================================");
-printf("\n [1] Player vs komputer   [2] Player vs player");
-printf("\n Pilihan anda : "); scanf("%d", &r);
-system("cls");
-
+void setMode()
+{
+    printf("\n==================================================");
+    printf("\n                                ");
+    printf("\n  		Mode permainan");
+    printf("\n                                ");
+    printf("\n==================================================");
+    printf("\n [1] Player vs komputer   [2] Player vs player");
+    printf("\n Pilihan anda : "); scanf("%d", &r);
+    system("cls");
 	switch(r)
-	{
-case 1:
+{
+    case 1:
 	//
-	printf("player vs komp \n");
-	setLevel();
-	system("cls");
+        printf("player vs komp \n");
+        setLevel();
+        system("cls");
 	break;
 	//
-case 2:
+    case 2:
 	//
-	printf("player vs player \n");
-	setScore();
-	system("cls");
+        printf("player vs player \n");
+        setScore();
+        system("cls");
 	break;
 	//
 	default:
 		printf("WRONG INPUT NUMBER.\n");
         system("pause");
         setMode();
-	}
 }
- void setLevel() {
-printf("\n==================================================");
-printf("\n                                ");
-printf("\n  			level ");
-printf("\n                                ");
-printf("\n==================================================");
-printf("\n [1] Easy 	 [2] Medium		[3] Hard");
-printf("\n Pilihan anda : "); scanf("%d", &s);
-system("cls");
+}
+
+void setLevel(){
+    printf("\n==================================================");
+    printf("\n                                ");
+    printf("\n  			level ");
+    printf("\n                                ");
+    printf("\n==================================================");
+    printf("\n [1] Easy 	 [2] Medium		[3] Hard");
+    printf("\n Pilihan anda : "); scanf("%d", &s);
+    system("cls");
 	if(s > 3){
 		printf("WRONG INPUT NUMBER.\n");
         system("pause");
         setLevel();
     }else{
-system("cls");
-setScore();
+        system("cls");
+        setScore();
+}
 }
 
-	}
 void setScore() {
-printf("\n==================================================");
-printf("\n                                ");
-printf("\n  			Score limit ");
-printf("\n                                ");
-printf("\n==================================================");
-printf("\n [1] 3     	   [2] 4	        	[3] 5");
-printf("\n Pilihan anda : "); scanf("%d", &t);
+    printf("\n==================================================");
+    printf("\n                                ");
+    printf("\n  			Score limit ");
+    printf("\n                                ");
+    printf("\n==================================================");
+    printf("\n [1] 3     	   [2] 4	        	[3] 5");
+    printf("\n Pilihan anda : "); scanf("%d", &t);
 //printf("\n%d\n", t);
-system("pause");
-system("cls");
+    system("pause");
+    system("cls");
 	if(t > 3){
 		printf("WRONG INPUT NUMBER.\n");
         system("pause");
         setScore();
-    } else {
-	system("cls");
-	gameTictoe();
-	}
-
+    }else{
+        system("cls");
+        gameTictoe();
 }
+}
+
 void setPapan() {
 	printf("\n==================================================");
 	printf("\n                                ");
@@ -151,6 +158,7 @@ void setPapan() {
 	}else{	setMode();
 }
 }
+
 void gameTictoe(){
 	switch(q){
 		case 1:
@@ -163,17 +171,16 @@ void gameTictoe(){
 		papan3();
 		break;
 
-	}
-
+}
 }
 
 void papan1(){
-switch(r){
-case 1:
-	papan1com();
+    switch(r){
+    case 1:
+        papan1com();
 	break;
-case 2:
-	papan1ply();
+    case 2:
+        papan1ply();
 	break;
 }
 }
@@ -197,21 +204,20 @@ void persiapanPapan(){
 				prepKol++;
 		}else {
 			prepan[i][j]='_';
-		}
-		printf("%c | ", prepan[i][j]);
-	}
-	printf("\n");
+              }
+            printf("%c | ", prepan[i][j]);
 }
-
+            printf("\n");
+}
 }
 
 void papan2(){
 	switch(r){
-case 1:
-	papan2com();
+    case 1:
+        papan2com();
 	break;
-case 2:
-	papan2ply();
+    case 2:
+        papan2ply();
 	break;
 }
 }
@@ -238,11 +244,11 @@ void papan2ply(){
 
 void papan3(){
 switch(r){
-case 1:
-	papan3com();
+    case 1:
+        papan3com();
 	break;
-case 2:
-	papan3ply();
+    case 2:
+        papan3ply();
 	break;
 }
 }
@@ -265,7 +271,11 @@ void turn(){
 	do{
 	inputPlayer1(x, y);
 	dispPapan();
+	system("cls");
+	dispPapan();
 	inputPlayer2(x, y);
+	dispPapan();
+	system("cls");
 	dispPapan();
 	}
 while(1);
@@ -281,21 +291,25 @@ void inputPlayer1(int i, int j){
 
 void inputPlayer2(int i, int j){
 	int x, y;
-	printf("Pilihan Anda : ");
-	scanf("%d %d", &x, &y);
-	i = x; j = y;
-	prepan[i][j]='O';
+        printf("Pilihan Anda : ");
+        scanf("%d %d", &x, &y);
+        i = x; j = y;
+        prepan[i][j]='O';
 }
 
 void dispPapan(){
 int i, j;
- for (i = 0; i< size;i++){
+    for (i = 0; i< size;i++){
 		for(j=0; j< size; j++){
-		printf("%c | ", prepan[i][j]);
-		}
-		printf("\n");
+            printf("%c | ", prepan[i][j]);
+}
+            printf("\n");
 }
 }
 
 bool cekPenuh(){
+	cekJadi();
+}
+
+bool cekJadi(){
 }
