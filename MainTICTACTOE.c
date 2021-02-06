@@ -44,10 +44,10 @@
 	bool cekXkol();
 	void barKos(int *i, int*j);
 	void kolKos(int *i, int*j);
-    bool cekKanDiag();
-    bool cekKirDiag();
-    void kananDiag(int *i, int*j);
-    void kiriDiag(int *i, int*j);
+    	bool cekKanDiag();
+    	bool cekKirDiag();
+    	void kananDiag(int *i, int*j);
+    	void kiriDiag(int *i, int*j);
 
 	void papan1ply();
 	void papan2ply();
@@ -57,19 +57,19 @@
 	bool cekPapan(int i, int j);
 	bool cekPenuh();
 	bool cekBarisJadi1();
-    bool cekKolomJadi1();
-    bool cekDiagonalJadi1();
+    	bool cekKolomJadi1();
+    	bool cekDiagonalJadi1();
 
 	bool cekBarisJadi2();
-    bool cekKolomJadi2();
-    bool cekDiagonalJadi2();
+    	bool cekKolomJadi2();
+    	bool cekDiagonalJadi2();
 
 	bool cekBarisJadi3();
-    bool cekKolomJadi3();
-    bool cekDiagonalJadi3();
+    	bool cekKolomJadi3();
+    	bool cekDiagonalJadi3();
 
-    int starttime();
-    int endtime();
+    	int starttime();
+    	int endtime();
 
 //Variabel Global
 	int p, q, r, s, t, size;
